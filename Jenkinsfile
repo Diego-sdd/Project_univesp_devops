@@ -6,7 +6,7 @@ pipeline {
         stage ('Build Docker Image') {
             steps {
                 script {
-                    dockerapp = docker.build("Diego-sdd:${env.BUILD_ID}", '-f ./Dockerfile ./')
+                    dockerapp = docker.build("Diego-sdd:${env.BUILD_ID}", '-f ../Dockerfile ../src')
                 }
             }
         }
