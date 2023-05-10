@@ -6,7 +6,7 @@ pipeline {
         stage ('Build Docker Image') {
             steps {
                 script {
-                    dockerapp = docker.build("diegodias2000/Api_devops:${env.BUILD_ID}", '-f ./Dockerfile ./')
+                    dockerapp = docker.build("diegodias2000:${env.BUILD_ID}", '-f ./Dockerfile ./')
                 }
             }
         }
@@ -14,8 +14,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry("https://registry.hub.docker.com", 'dockerhub') {
-                        dockerapp.push('latest')
-                        dockerapp.push("${env.BUILD_ID}")
+                        dockerapp.push('Api_devops:latest')
+                        dockerapp.push("Api_devops:${env.BUILD_ID}")
                     }
                 }
             }
